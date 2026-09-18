@@ -41,11 +41,17 @@ body{
 
 /* ---- masthead ---- */
 .mast{padding-bottom:26px}
+.mastrow{display:flex;align-items:baseline;justify-content:space-between;gap:12px 20px;flex-wrap:wrap}
 .owner{
   margin:0 0 10px;font-size:13px;color:var(--ink2);
   font-variation-settings:"wdth" 100,"wght" 400;
 }
 .owner b{color:var(--ink);font-variation-settings:"wght" 620}
+.updated{
+  margin:0 0 10px;font-size:12px;color:var(--ink2);
+  font-family:"IBM Plex Mono",ui-monospace,monospace;white-space:nowrap;
+}
+.updated b{color:var(--ink);font-variation-settings:"wght" 600}
 h1{
   font-size:clamp(30px,6vw,46px); margin:0 0 6px;
   font-variation-settings:"wdth" 115,"wght" 650;
@@ -114,7 +120,7 @@ h1{
   color:var(--live);
 }
 .subst[data-st="in-review"]{color:var(--hold)}
-.subst[data-st="in-review"]{color:var(--hold)}
+.subst[data-st="not-started"]{color:var(--hold)}
 .subdate{
   flex:0 0 52px;text-align:right;font-size:12px;
   font-family:"IBM Plex Mono",ui-monospace,monospace;color:var(--ink2);
@@ -176,6 +182,14 @@ h1{
 
 .foot{margin-top:56px;padding-top:18px;border-top:1px solid var(--rule);font-size:13.5px;color:var(--ink2);max-width:62ch}
 
+.qdivider{position:relative;text-align:center;margin:46px 0 10px}
+.qdivider::before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:var(--rule)}
+.qdivider span{
+  position:relative;background:var(--paper);padding:0 14px;
+  font-size:12px;color:var(--ink2);text-transform:uppercase;letter-spacing:.08em;
+  font-variation-settings:"wdth" 96,"wght" 600;
+}
+
 @media (prefers-reduced-motion: reduce){*{transition:none !important}}
 @media (max-width:620px){
   .head{flex-wrap:wrap;gap:4px 10px;padding:10px 12px}
@@ -187,7 +201,10 @@ h1{
 <body>
 <div class="band"><div class="wrap">
 <header class="mast">
-  <p class="owner">kody.com — <b>Chloe Li</b>, Design</p>
+  <div class="mastrow">
+    <p class="owner">kody.com — <b>Chloe Li</b>, Design</p>
+    <p class="updated">Last updated <b>18 Sep 2026</b></p>
+  </div>
   <h1>Kody site structure</h1>
   <p class="sub">Every page kody.com has today, plus what the benchmarks say we&rsquo;re missing. Open any row to see why it&rsquo;s proposed and what the equivalent page looks like on Stripe, Adyen or Shopify.</p>
   <div class="key">
@@ -198,7 +215,7 @@ h1{
   </div>
   <div class="tallies">
     <div class="tally p"><b>21</b><span>pages to build</span></div>
-    <div class="tally l"><b>7</b><span>live today</span></div>
+    <div class="tally l"><b>5</b><span>live today</span></div>
   </div>
 </header>
 </div></div>
@@ -216,19 +233,18 @@ const DATA = [
  {sec:"Live today", meta:"what exists now", rows:[
   {id:"home", path:"/", name:"Homepage", kind:"live", when:"Live",
    note:"The redesign we're building. Right now it's also the entire website \u2014 there's no nav, so a visitor who doesn't book a demo has nowhere to go.",
-   ev:"15 sections, all live",
-   subs:[{n:"Nav — SmartNav auto-hide",st:"Live",d:"4 Sep"},{n:"Hero",st:"Live",d:"4 Sep"},{n:"Client logo wall",st:"Live",d:"4 Sep"},{n:"Infrastructure diagram",st:"Live",d:"4 Sep"},{n:"CTA — Book a demo",st:"Live",d:"4 Sep"},{n:"Footer",st:"Live",d:"4 Sep"},{n:"Product pillar 1 — Higher profit margin",st:"Live",d:"11 Sep"},{n:"Product pillar 2 — Operational efficiency",st:"Live",d:"11 Sep"},{n:"Product pillar 3 — Capital",st:"Live",d:"11 Sep"},{n:"Case study — Langham",st:"Live",d:"11 Sep"},{n:"Credibility stats",st:"Live",d:"14 Sep"},{n:"Product image section",st:"Live",d:"15 Sep"},{n:"Online payment card iteration",st:"Live",d:"16 Sep"},{n:"Press section, 2 cards",st:"Live",d:"16 Sep"},{n:"Case study 2 — Rosewood & MINISO",st:"Live",d:"17 Sep"}]},
+   ev:"17 sections, all live",
+   subs:[{n:"Nav — SmartNav auto-hide",st:"Live",d:"4 Sep"},{n:"Hero",st:"Live",d:"4 Sep"},{n:"Client logo wall",st:"Live",d:"4 Sep"},{n:"Infrastructure diagram",st:"Live",d:"4 Sep"},{n:"CTA — Book a demo",st:"Live",d:"4 Sep"},{n:"Footer",st:"Live",d:"4 Sep"},{n:"Product pillar 1 — Higher profit margin",st:"Live",d:"11 Sep"},{n:"Product pillar 2 — Operational efficiency",st:"Live",d:"11 Sep"},{n:"Product pillar 3 — Capital",st:"Live",d:"11 Sep"},{n:"Case study — Langham",st:"Live",d:"11 Sep"},{n:"Credibility stats",st:"Live",d:"14 Sep"},{n:"Product image section",st:"Live",d:"15 Sep"},{n:"Online payment card iteration",st:"Live",d:"16 Sep"},{n:"Press section, 2 cards",st:"Live",d:"16 Sep"},{n:"Series A announcement — /press-series-a",st:"Live",d:"16 Sep"},{n:"Pre-Series A announcement — /press-pre-series-a",st:"Live",d:"16 Sep"},{n:"Case study 2 — Rosewood & MINISO",st:"Live",d:"17 Sep"}]},
   {id:"demo", path:"/book-a-demo", name:"Book a demo", kind:"live", when:"Live",
-   note:"Our only conversion path.", ev:""},
+   note:"Our only conversion path.", ev:"",
+   subs:[{n:"Form — Country/Job role/Consent",st:"Live",d:"4 Sep"},{n:"Success state — handshake illustration",st:"Live",d:"4 Sep"}]},
   {id:"help", path:"/help-centre", name:"Help center", kind:"live", when:"Live",
    note:"WhatsApp numbers for UK and Hong Kong. Fine as-is. Spelling should go to US English to match the rest of the site.", ev:""},
   {id:"career", path:"/career", name:"Careers", kind:"live", when:"Live", note:"Live and reachable from the footer.", ev:""},
   {id:"legal", path:"/legal", name:"Legal", kind:"live", when:"Live",
-   note:"Five sub-pages. Separately flagged: some boilerplate here reads verbatim from Adyen and Stripe and needs a legal review.", ev:""},
-  {id:"pressa", path:"/press-series-a", name:"Series A announcement", kind:"live", when:"Live",
-   note:"Only reachable from one homepage card. No index page above it.", ev:""},
-  {id:"presspre", path:"/press-pre-series-a", name:"Pre-Series A announcement", kind:"live", when:"Live",
-   note:"Same — an orphan.", ev:"", last:true}
+   note:"Five sub-pages. Separately flagged: some boilerplate here reads verbatim from Adyen and Stripe and needs a legal review.", ev:"",
+   blocked:"Cookie policy not started — go-live blocker for the whole site.",
+   subs:[{n:"Privacy policy",st:"Live",d:"4 Sep"},{n:"Cookie policy",st:"Not started",d:""}], last:true}
  ]},
 
  {sec:"Products", meta:"6 new pages", brief:"Stripe's /payments page runs one promise, then four benefit headings, then the page splits into named sub-sections \u2014 online, global, in-person \u2014 each showing the actual integration options side by side rather than describing them. Concrete numbers sit inline (\u201c125+ payment methods\u201d, a 2x conversion stat), not in a stats band. Our product pages should follow that shape: one sentence on what it does, three or four benefits, then the real options laid out. Most of this copy already exists on the homepage; it just needs room.", rows:[
@@ -322,6 +338,14 @@ const DATA = [
 const board = document.getElementById('board');
 
 DATA.forEach((sec, si) => {
+  if (si === 1) {
+    const div = document.createElement('div');
+    div.className = 'qdivider';
+    const label = document.createElement('span');
+    label.textContent = 'Planned pages for Q4';
+    div.appendChild(label);
+    board.appendChild(div);
+  }
   const s = document.createElement('section');
   s.className = 'sec' + (si === 0 ? ' first' : '');
   const h = document.createElement('div');
