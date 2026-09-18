@@ -47,6 +47,8 @@ body{
   font-variation-settings:"wdth" 100,"wght" 400;
 }
 .owner b{color:var(--ink);font-variation-settings:"wght" 620}
+.owner a{color:var(--ink);text-decoration:underline;text-underline-offset:2px;text-decoration-color:var(--rule)}
+.owner a:hover{color:var(--route);text-decoration-color:currentColor}
 .updated{
   margin:0 0 10px;font-size:12px;color:var(--ink2);
   font-family:"IBM Plex Mono",ui-monospace,monospace;white-space:nowrap;
@@ -202,7 +204,7 @@ h1{
 <div class="band"><div class="wrap">
 <header class="mast">
   <div class="mastrow">
-    <p class="owner">kody.com — <b>Chloe Li</b>, Design</p>
+    <p class="owner"><a href="https://kody.com" target="_blank" rel="noopener noreferrer">kody.com</a> — <b>Chloe Li</b>, Design</p>
     <p class="updated">Last updated <b>18 Sep 2026</b></p>
   </div>
   <h1>Kody site structure</h1>
