@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kody site structure — read-only</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,300..800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F3F3F3; --card:#FFFFFF; --ink:#0E1A2B; --ink2:#5A6676;
+  --rule:#DCDCD8; --route:#1636E8; --live:#14806B; --cut:#B3342A; --hold:#8A6A16;
+  --shade:rgba(14,26,43,.045);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0B121C; --card:#141D2A; --ink:#EDEFF2; --ink2:#97A3B3;
+    --rule:#26313F; --route:#7E96FF; --live:#42BCA0; --cut:#E8786C; --hold:#D4AC5B;
+    --shade:rgba(255,255,255,.05);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0B121C; --card:#141D2A; --ink:#EDEFF2; --ink2:#97A3B3;
+  --rule:#26313F; --route:#7E96FF; --live:#42BCA0; --cut:#E8786C; --hold:#D4AC5B;
+  --shade:rgba(255,255,255,.05);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:"Archivo",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  font-variation-settings:"wdth" 100,"wght" 400;
+  font-size:16px; line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1120px;margin:0 auto;padding:0 28px 96px}
+.band{border-bottom:2px solid var(--ink);background:var(--card)}
+.band .wrap{padding-top:40px;padding-bottom:0}
+.wrap.board{padding-top:4px}
+
+/* ---- masthead ---- */
+.mast{padding-bottom:26px}
+.owner{
+  margin:0 0 10px;font-size:13px;color:var(--ink2);
+  font-variation-settings:"wdth" 100,"wght" 400;
+}
+.owner b{color:var(--ink);font-variation-settings:"wght" 620}
+h1{
+  font-size:clamp(30px,6vw,46px); margin:0 0 6px;
+  font-variation-settings:"wdth" 115,"wght" 650;
+  letter-spacing:-.022em; line-height:1.02;
+}
+.sub{color:var(--ink2);font-size:15px;margin:0;max-width:74ch}
+.key{
+  display:flex;flex-wrap:wrap;gap:8px 30px;
+  margin:20px 0 0;
+  font-size:13px;color:var(--ink2);line-height:1.5;
+}
+.key span{display:inline-flex;align-items:baseline;gap:7px}
+.key b{color:var(--ink);font-variation-settings:"wght" 640;flex:0 0 auto}
+.tallies{display:flex;flex-wrap:wrap;gap:12px 34px;margin-top:18px}
+.tally{display:flex;align-items:baseline;gap:7px}
+.tally b{font-size:22px;font-variation-settings:"wdth" 108,"wght" 700;letter-spacing:-.01em}
+.tally span{font-size:13px;color:var(--ink2)}
+.tally.p b{color:var(--route)} .tally.l b{color:var(--live)} .tally.c b{color:var(--cut)}
+
+
+
+/* ---- sections + route line ---- */
+.sec{margin-top:34px}
+.sechead{
+  display:flex;align-items:baseline;gap:12px;
+  padding-left:40px;margin-bottom:8px;position:relative;
+}
+.sechead h2{
+  font-size:19px;margin:0;
+  font-variation-settings:"wdth" 112,"wght" 620;letter-spacing:-.012em;
+}
+.sechead em{font-style:normal;font-size:13px;color:var(--ink2)}
+.sechead::before{
+  content:"";position:absolute;left:17px;top:0;bottom:-8px;width:2px;background:var(--rule);
+}
+.sec.first .sechead::before{top:8px}
+
+.briefwrap{position:relative;padding-left:40px;margin:0 0 12px}
+.briefwrap::before{content:"";position:absolute;left:17px;top:0;bottom:-12px;width:2px;background:var(--rule)}
+.brieftoggle{
+  font:inherit;font-size:12.5px;font-variation-settings:"wdth" 98,"wght" 550;
+  color:var(--ink2);background:none;border:0;padding:2px 0;cursor:pointer;
+  display:inline-flex;align-items:center;gap:6px;
+}
+.brieftoggle:hover{color:var(--ink)}
+.brieftoggle:focus-visible{outline:2px solid var(--route);outline-offset:3px;border-radius:2px}
+.brieftoggle::after{
+  content:"";width:5px;height:5px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;
+  transform:rotate(45deg) translate(-1px,-1px);transition:transform .16s ease;
+}
+.briefwrap.open .brieftoggle{color:var(--ink)}
+.briefwrap.open .brieftoggle::after{transform:rotate(-135deg) translate(-2px,-2px)}
+.brief{
+  margin:9px 0 4px;max-width:70ch;
+  font-size:13.5px;line-height:1.62;color:var(--ink2);
+}
+.subcap{margin:16px 0 4px;font-size:12px;color:var(--ink2);font-variation-settings:"wdth" 96,"wght" 600}
+.subs{margin:0;max-width:52ch;border-top:1px solid var(--rule)}
+.sub{
+  position:relative;padding:6px 0;display:flex;align-items:baseline;gap:12px;
+  font-size:13px;color:var(--ink2);border-bottom:1px solid var(--rule);
+}
+.subname{flex:1 1 auto;min-width:0}
+.subst{
+  flex:0 0 auto;font-size:11.5px;font-variation-settings:"wdth" 94,"wght" 600;
+  color:var(--live);
+}
+.subst[data-st="in-review"]{color:var(--hold)}
+.subst[data-st="in-review"]{color:var(--hold)}
+.subdate{
+  flex:0 0 52px;text-align:right;font-size:12px;
+  font-family:"IBM Plex Mono",ui-monospace,monospace;color:var(--ink2);
+}
+.row{position:relative;padding-left:40px}
+.row::before{content:"";position:absolute;left:17px;top:0;bottom:0;width:2px;background:var(--rule)}
+.row.last::before{bottom:auto;height:22px}
+.row::after{content:"";position:absolute;left:19px;top:21px;width:13px;height:2px;background:var(--rule)}
+
+.glyph{
+  position:absolute;left:11px;top:15px;width:14px;height:14px;border-radius:50%;
+  background:var(--paper);border:2px solid var(--route);z-index:2;
+}
+.row[data-kind="live"] .glyph{border-radius:2px;background:var(--live);border-color:var(--live)}
+.row[data-kind="cut"] .glyph{border:0;background:transparent;color:var(--cut);
+  font-size:15px;line-height:14px;text-align:center;font-variation-settings:"wght" 700}
+.row[data-kind="cut"] .glyph::before{content:"\00d7"}
+
+/* ---- row head ---- */
+.head{
+  display:flex;align-items:center;gap:12px;width:100%;
+  background:var(--card);border:1px solid var(--rule);border-left:3px solid var(--rule);
+  border-radius:3px;padding:9px 12px;margin-bottom:5px;
+  font:inherit;color:inherit;text-align:left;cursor:pointer;
+  transition:border-color .15s ease, background .15s ease;
+}
+.head:hover{border-color:var(--ink2)}
+.head:focus-visible{outline:2px solid var(--route);outline-offset:2px}
+
+.path{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:13px;
+  color:var(--ink2);flex:0 0 auto;
+}
+.row[data-kind="cut"] .path{color:var(--cut)}
+.name{flex:1 1 auto;font-size:15px;font-variation-settings:"wdth" 102,"wght" 450;min-width:0}
+.when{
+  font-size:12px;color:var(--ink2);flex:0 0 auto;
+  font-variation-settings:"wdth" 96,"wght" 600;letter-spacing:.01em;
+}
+.when[data-p="P0"]{color:var(--cut)}
+.when[data-p="P1"]{color:var(--ink)}
+.flag{
+  flex:0 0 auto;font-size:11.5px;color:var(--hold);
+  font-variation-settings:"wdth" 94,"wght" 600;
+  border:1px solid currentColor;border-radius:2px;padding:0 5px;line-height:16px;
+}
+.blocker{
+  margin:10px 0 0;font-size:13.5px;max-width:62ch;color:var(--hold);
+  border-left:2px solid currentColor;padding-left:11px;
+}
+.blocker b{font-variation-settings:"wght" 650}
+.mark[data-v="yes"]{color:var(--live)} .mark[data-v="remove"],.mark[data-v="maybe"],.mark[data-v="noindex"]{color:var(--hold)} 
+/* ---- panel ---- */
+.panel{display:none;padding:2px 0 14px}
+.row.open .panel{display:block}
+.row.open .head{background:var(--shade)}
+.note{margin:6px 0 0;font-size:14.5px;max-width:62ch;line-height:1.55}
+.ev{margin:8px 0 0;font-size:13px;color:var(--ink2);max-width:62ch}
+
+.foot{margin-top:56px;padding-top:18px;border-top:1px solid var(--rule);font-size:13.5px;color:var(--ink2);max-width:62ch}
+
+@media (prefers-reduced-motion: reduce){*{transition:none !important}}
+@media (max-width:620px){
+  .head{flex-wrap:wrap;gap:4px 10px;padding:10px 12px}
+  .name{flex:1 1 100%;order:3}
+    .when{margin-left:auto}
+}
+</style>
+</head>
+<body>
+<div class="band"><div class="wrap">
+<header class="mast">
+  <p class="owner">kody.com — <b>Chloe Li</b>, Design</p>
+  <h1>Kody site structure</h1>
+  <p class="sub">Every page kody.com has today, plus what the benchmarks say we&rsquo;re missing. Open any row to see why it&rsquo;s proposed and what the equivalent page looks like on Stripe, Adyen or Shopify.</p>
+  <div class="key">
+    <span><b>P1</b> nav breaks without it</span>
+    <span><b>P2</b> sales keeps hitting the gap</span>
+    <span><b>P3</b> real, but not urgent</span>
+    <span><b>Blocked</b> waiting on a fact or a person, not on design</span>
+  </div>
+  <div class="tallies">
+    <div class="tally p"><b>21</b><span>pages to build</span></div>
+    <div class="tally l"><b>7</b><span>live today</span></div>
+  </div>
+</header>
+</div></div>
+
+<div class="wrap board">
+<main id="board"></main>
+
+<p class="foot">Read-only copy. Benchmark counts and page templates come from the live nav, sitemaps and pages of stripe.com, adyen.com and shopify.com, read 18 Sep 2026. Decisions are recorded on the internal version of this board.</p>
+
+</div>
+
+<script>
+
+const DATA = [
+ {sec:"Live today", meta:"what exists now", rows:[
+  {id:"home", path:"/", name:"Homepage", kind:"live", when:"Live",
+   note:"The redesign we're building. Right now it's also the entire website \u2014 there's no nav, so a visitor who doesn't book a demo has nowhere to go.",
+   ev:"15 sections, all live",
+   subs:[{n:"Nav — SmartNav auto-hide",st:"Live",d:"4 Sep"},{n:"Hero",st:"Live",d:"4 Sep"},{n:"Client logo wall",st:"Live",d:"4 Sep"},{n:"Infrastructure diagram",st:"Live",d:"4 Sep"},{n:"CTA — Book a demo",st:"Live",d:"4 Sep"},{n:"Footer",st:"Live",d:"4 Sep"},{n:"Product pillar 1 — Higher profit margin",st:"Live",d:"11 Sep"},{n:"Product pillar 2 — Operational efficiency",st:"Live",d:"11 Sep"},{n:"Product pillar 3 — Capital",st:"Live",d:"11 Sep"},{n:"Case study — Langham",st:"Live",d:"11 Sep"},{n:"Credibility stats",st:"Live",d:"14 Sep"},{n:"Product image section",st:"Live",d:"15 Sep"},{n:"Online payment card iteration",st:"Live",d:"16 Sep"},{n:"Press section, 2 cards",st:"Live",d:"16 Sep"},{n:"Case study 2 — Rosewood & MINISO",st:"Live",d:"17 Sep"}]},
+  {id:"demo", path:"/book-a-demo", name:"Book a demo", kind:"live", when:"Live",
+   note:"Our only conversion path.", ev:""},
+  {id:"help", path:"/help-centre", name:"Help center", kind:"live", when:"Live",
+   note:"WhatsApp numbers for UK and Hong Kong. Fine as-is. Spelling should go to US English to match the rest of the site.", ev:""},
+  {id:"career", path:"/career", name:"Careers", kind:"live", when:"Live", note:"Live and reachable from the footer.", ev:""},
+  {id:"legal", path:"/legal", name:"Legal", kind:"live", when:"Live",
+   note:"Five sub-pages. Separately flagged: some boilerplate here reads verbatim from Adyen and Stripe and needs a legal review.", ev:""},
+  {id:"pressa", path:"/press-series-a", name:"Series A announcement", kind:"live", when:"Live",
+   note:"Only reachable from one homepage card. No index page above it.", ev:""},
+  {id:"presspre", path:"/press-pre-series-a", name:"Pre-Series A announcement", kind:"live", when:"Live",
+   note:"Same — an orphan.", ev:"", last:true}
+ ]},
+
+ {sec:"Products", meta:"6 new pages", brief:"Stripe's /payments page runs one promise, then four benefit headings, then the page splits into named sub-sections \u2014 online, global, in-person \u2014 each showing the actual integration options side by side rather than describing them. Concrete numbers sit inline (\u201c125+ payment methods\u201d, a 2x conversion stat), not in a stats band. Our product pages should follow that shape: one sentence on what it does, three or four benefits, then the real options laid out. Most of this copy already exists on the homepage; it just needs room.", rows:[
+  {id:"products", path:"/products", name:"Products index", kind:"new", when:"P1",
+   note:"One page listing everything Kody does, with every product page hanging off it. This is the first nav item and nothing below it works without it.",
+   ev:"Stripe 31 product pages · Shopify ~25 · Adyen ~14 · Kody 0"},
+  {id:"p-online", path:"/products/online", name:"Online payments", kind:"new", when:"P1",
+   note:"Gateway, payment links, virtual terminal, embedded checkout. All four already have copy on the homepage — this just gives them room.",
+   ev:""},
+  {id:"p-capital", path:"/products/capital", name:"Capital", kind:"new", when:"P1", blocked:"No content in pitch deck — nothing on cash advances, limits or eligibility. Every figure on the page would be unsourced.",
+   note:"Cash advances up to US$2.5M. Currently one homepage block, and the details still aren't confirmed against the deck.",
+   ev:"Stripe runs two: /capital and /capital/platforms"},
+  {id:"p-report", path:"/products/reporting", name:"Reporting & reconciliation", kind:"new", when:"P1",
+   note:"The back-office story — unified reporting, ERP-integrated reconciliation, automatic OTA virtual card posting. The deck has far more on this than the homepage can carry.",
+   ev:""},
+  {id:"p-term", path:"/products/terminal", name:"Card terminals", kind:"new", when:"P2",
+   note:"The hardware we actually ship, with specs and photos. A buyer comparing us to Adyen can see their device line-up and can't see ours.",
+   ev:"Adyen: 19 device pages plus a side-by-side comparison table"},
+  {id:"p-fx", path:"/products/fx", name:"Currency conversion", kind:"new", when:"P2",
+   note:"Dynamic currency conversion and the cashback story. Strong for APAC inbound travel, currently one homepage widget.",
+   ev:"Adyen gives this a standalone page", last:true}
+ ]},
+
+ {sec:"Industries", meta:"2 new pages", brief:"Adyen's hotel page is the closest model we have. It opens on a rhythm headline, then guest experience, then their own advantage, then real results from named hospitality customers, then the specific tools, then a five-question FAQ \u2014 \u201cwhich terminals do you offer hotels\u201d, \u201chow does reconciliation work\u201d. That FAQ is doing SEO work and pre-empting the sales call at the same time. Ours should carry the OTA and PMS automation story, which Adyen's page doesn't have.", rows:[
+  {id:"i-hosp", path:"/industries/hospitality", name:"Hospitality", kind:"new", when:"P1",
+   note:"Our sharpest differentiator, and it's diluted on a general homepage. OTA and PMS automation, front-desk workflow, group rollout — all of it belongs here.",
+   ev:"Adyen: 19 industry pages, nested two levels deep · Stripe: 12"},
+  {id:"i-retail", path:"/industries/retail", name:"Retail", kind:"new", when:"P1",
+   note:"MINISO's story needs somewhere to land beyond a single homepage card.",
+   ev:"", last:true}
+ ]},
+
+ {sec:"Customers", meta:"4 new pages", brief:"Stripe's index leads with outcomes before logos \u2014 \u201c$70M\u201d, \u201c6 months faster\u201d, \u201c12 new countries\u201d \u2014 then sorts stories two ways, by company size and by product used. With four case studies we don't need filtering yet, but we do need the result stated before the client name. The individual pages already follow the Stripe headline formula: client as subject, active verb, \u201cwith Kody\u201d at the end.", rows:[
+  {id:"cust", path:"/customers", name:"Customers index", kind:"new", when:"P1",
+   note:"Parent page for the case studies. Right now they exist only as homepage cards with nowhere to click through to.",
+   ev:"All three benchmarks have one"},
+  {id:"c-lang", path:"/customers/langham", name:"Langham", kind:"new", when:"P1", blocked:"Are the three metrics Langham-specific or typical Kody outcomes? No named owner for client sign-off.",
+   note:"Furthest along — layout approved. Still blocked on whether the three metrics are Langham-specific or typical Kody outcomes.",
+   ev:""},
+  {id:"c-rose", path:"/customers/rosewood", name:"Rosewood", kind:"new", when:"P1", blocked:"Jonathan needs to confirm deployment status before we can write “with Kody”, plus the exact award name and years.",
+   note:"Copy approved. Blocked on Jonathan confirming deployment status before we can say \"with Kody\", and on the exact award name and years.",
+   ev:""},
+  {id:"c-mini", path:"/customers/miniso", name:"MINISO", kind:"new", when:"P2",
+   note:"Copy approved, page not built.",
+   ev:"", last:true}
+ ]},
+
+ {sec:"Pricing", meta:"1 new page", brief:"Adyen's pricing page is mostly an FAQ, and the first question is \u201cwhat is interchange++\u201d. They explain the model, publish per-method rates, and answer setup fees, multi-currency and custom pricing \u2014 without ever quoting a single blended rate. That's the version we can ship: explain how we charge and what moves the number, and let the rate itself stay a conversation.", rows:[
+  {id:"pricing", path:"/pricing", name:"Pricing", kind:"new", when:"P2",
+   note:"All three benchmarks put pricing in the top nav. We have nothing. Even without published rates, an interchange++ explainer beats silence — buyers read silence as expensive.",
+   ev:"Stripe, Adyen and Shopify: all top-nav", last:true}
+ ]},
+
+ {sec:"Trust", meta:"3 new pages", brief:"Adyen's licences page is a plain list by region \u2014 Australia, Canada, EMEA, India, United States, Malaysia \u2014 naming the entity and permission in each. No design to it, and that's the point: procurement wants to copy it into a form. Ours would be UK, EU, Hong Kong and Singapore. Security follows the same logic \u2014 certifications, encryption, data residency, stated flatly.", rows:[
+  {id:"security", path:"/security", name:"Security", kind:"new", when:"P2",
+   note:"PCI DSS level, encryption, tokenization, data residency. This is the first thing a hotel group's procurement team asks for, and we have no page to send them.",
+   ev:"Adyen: /infrastructure · Stripe: security docs in top nav",
+   blocked:"No content in pitch deck — no PCI DSS level, encryption or data residency anywhere in it. Only an Oracle certification on p.25."},
+  {id:"licenses", path:"/licenses", name:"Licenses & regulation", kind:"new", when:"P2", blocked:"No content in pitch deck. The only line is \u201cfunds settled by reputable licensed acquirers\u201d, and p.62 names Adyen as the acquirer — which entity Kody holds what in is unanswered.",
+   note:"We operate across UK, EU, Hong Kong and Singapore. Enterprise legal teams will ask which entity holds what.",
+   ev:"Adyen: 9 licence pages · Stripe: /licenses · Kody: 0"},
+  {id:"status", path:"/status", name:"Service status", kind:"new", when:"P3", blocked:"Deck p.64 states 99.7%+ uptime. The homepage says 99.99%. One of the two has to change before this page can exist.",
+   note:"We claim 99.99% uptime on the homepage with nothing behind it, and our internal figure is 99.7%. A status page would make the number honest — or force us to change it.",
+   ev:"Adyen, Stripe and Shopify all run one", last:true}
+ ]},
+
+ {sec:"Platform", meta:"2 new pages", brief:"Adyen and Shopify both treat the integration list as a browsable directory, one page per partner, which is what turns it into search traffic. Ours should start from the logos already on the homepage infrastructure diagram: every PMS, POS, CRM and ERP on that diagram is a page saying what the integration does and how to turn it on.", rows:[
+  {id:"integrations", path:"/integrations", name:"Integration directory", kind:"new", when:"P2",
+   note:"The infrastructure diagram is the centrepiece of the homepage — PMS, POS, CRM, ERP — and there's no page saying what actually connects. Every logo on that diagram should be its own landing page. Probably the highest-leverage SEO we have.",
+   ev:"Adyen: 208 partner pages · Shopify: App Store · Stripe: App Marketplace"},
+  {id:"developers", path:"/developers", name:"Developer docs", kind:"new", when:"P3", blocked:"Zhixin to confirm what API documentation is public.",
+   note:"Stripe and Adyen both make docs a top-nav item. Need Zhixin to confirm what's public and where it lives.",
+   ev:"", last:true}
+ ]},
+
+ {sec:"Company", meta:"3 new pages", brief:"Adyen's about page is short \u2014 one positioning line and a company milestones timeline, nothing more. That's reachable for us: what Kody is, the funding and venue milestones we can already source from the two press releases, and who to contact. The newsroom is just an index so the announcements stop being orphans.", rows:[
+  {id:"about", path:"/about", name:"About", kind:"new", when:"P1",
+   note:"Every enterprise buyer looks for this. We don't have one. For a payments company asking hotels to trust us with their money, that's a real problem.",
+   ev:""},
+  {id:"contact", path:"/contact", name:"Contact", kind:"new", when:"P1",
+   note:"Book a demo is a conversion form, not a contact page. Someone with a support question, a press query or a partnership has no route in.",
+   ev:"Adyen runs 7 contact pages plus an offices page"},
+  {id:"newsroom", path:"/newsroom", name:"Newsroom", kind:"new", when:"P2",
+   note:"An index for the two funding announcements, which are currently orphans, and somewhere to put the next one.",
+   ev:"", last:true}
+ ]}
+
+];
+
+/* ---------- render ---------- */
+const board = document.getElementById('board');
+
+DATA.forEach((sec, si) => {
+  const s = document.createElement('section');
+  s.className = 'sec' + (si === 0 ? ' first' : '');
+  const h = document.createElement('div');
+  h.className = 'sechead';
+  h.innerHTML = '<h2></h2><em></em>';
+  h.querySelector('h2').textContent = sec.sec;
+  h.querySelector('em').textContent = sec.meta;
+  s.appendChild(h);
+  if (sec.brief) {
+    const wrap = document.createElement('div');
+    wrap.className = 'briefwrap';
+    const t = document.createElement('button');
+    t.type = 'button'; t.className = 'brieftoggle';
+    t.setAttribute('aria-expanded', 'false');
+    t.textContent = 'What the benchmarks do';
+    const b = document.createElement('p');
+    b.className = 'brief'; b.textContent = sec.brief; b.hidden = true;
+    t.addEventListener('click', () => {
+      const open = !b.hidden;
+      b.hidden = open;
+      t.setAttribute('aria-expanded', String(!open));
+      wrap.classList.toggle('open', !open);
+    });
+    wrap.append(t, b);
+    s.appendChild(wrap);
+  }
+
+  sec.rows.forEach(r => {
+    const row = document.createElement('div');
+    row.className = 'row' + (r.last ? ' last' : '');
+    row.dataset.kind = r.kind;
+    row.dataset.id = r.id;
+
+    const g = document.createElement('span'); g.className = 'glyph'; row.appendChild(g);
+
+    const head = document.createElement('button');
+    head.className = 'head';
+    head.setAttribute('aria-expanded', 'false');
+    const p = document.createElement('span'); p.className = 'path'; p.textContent = r.path;
+    const n = document.createElement('span'); n.className = 'name'; n.textContent = r.name;
+    const w = document.createElement('span'); w.className = 'when'; w.textContent = r.when;
+    w.dataset.p = r.when;
+    head.append(p, n);
+    if (r.blocked) {
+      const f = document.createElement('span');
+      f.className = 'flag';
+      f.textContent = /^No content in pitch deck/.test(r.blocked) ? 'No content in deck' : 'Blocked';
+      head.appendChild(f);
+    }
+    head.append(w);
+    row.appendChild(head);
+
+    const panel = document.createElement('div');
+    panel.className = 'panel';
+    const note = document.createElement('p'); note.className = 'note'; note.textContent = r.note;
+    panel.appendChild(note);
+    if (r.ev) { const e = document.createElement('p'); e.className = 'ev'; e.textContent = r.ev; panel.appendChild(e); }
+    if (r.blocked) {
+      const bl = document.createElement('p');
+      bl.className = 'blocker';
+      const lab = document.createElement('b');
+      lab.textContent = (/^No content in pitch deck/.test(r.blocked) ? 'Content gap' : 'Blocked') + ' \u2014 ';
+      bl.append(lab, document.createTextNode(r.blocked));
+      panel.appendChild(bl);
+    }
+
+    head.addEventListener('click', () => {
+      const open = row.classList.contains('open');
+      document.querySelectorAll('.row.open').forEach(o => {
+        o.classList.remove('open');
+        o.querySelector('.head').setAttribute('aria-expanded', 'false');
+      });
+      if (!open) { row.classList.add('open'); head.setAttribute('aria-expanded', 'true'); }
+    });
+
+    if (r.subs) {
+      const list = document.createElement('div');
+      list.className = 'subs';
+      r.subs.forEach((sb, k) => {
+        const sr = document.createElement('div');
+        sr.className = 'sub' + (k === r.subs.length - 1 ? ' last' : '');
+        const sn = document.createElement('span'); sn.className = 'subname'; sn.textContent = sb.n;
+        const ss = document.createElement('span');
+        ss.className = 'subst'; ss.textContent = sb.st;
+        ss.dataset.st = sb.st.toLowerCase().replace(/\s+/g, '-');
+        const sd = document.createElement('span');
+        sd.className = 'subdate'; sd.textContent = sb.d || '\u2014';
+        sr.append(sn, ss, sd);
+        list.appendChild(sr);
+      });
+      const cap = document.createElement('p');
+      cap.className = 'subcap'; cap.textContent = 'Sections, in go-live order';
+      panel.append(cap, list);
+    }
+
+    row.appendChild(panel);
+    s.appendChild(row);
+  });
+  board.appendChild(s);
+});
+
+
+</script>
+</body>
+</html>
