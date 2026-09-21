@@ -18,7 +18,19 @@ Tracks changes to `index.html`, the Kody site-structure board.
 - Added a "Planned pages for Q4" divider between the "Live today" and
   "Products" sections.
 - Added a "Last updated" timestamp to the top right of the masthead.
+- Linked "kody.com" in the masthead byline to the live site.
+- Added this changelog.
+
+## 2026-09-21
+
+- Added a new Homepage section: **Case study — LVMH Le Café**, live
+  same day. Section count updated from 17 to 18.
+- Noted in-progress design iteration on two existing Homepage
+  sections: Higher profit margin's static image is being rebuilt as
+  live Framer frames, and the one-platform infrastructure diagram is
+  getting a readability and visual-language pass to unify it with the
+  rest of the page.
 
 ---
 
-**Last updated:** 2026-09-18
+**Last updated:** 2026-09-21
