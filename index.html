@@ -198,6 +198,30 @@ h1{
   .name{flex:1 1 100%;order:3}
     .when{margin-left:auto}
 }
+
+/* ---- status strip (region between TRACKER markers is generated) ---- */
+.statusband{background:var(--card);border-bottom:2px solid var(--ink)}
+.statusband .wrap{padding-top:26px;padding-bottom:28px}
+.statusnow .cols{display:grid;grid-template-columns:1fr 1fr;gap:26px 44px}
+.statusnow h2{
+  margin:0 0 10px;font-size:12px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--ink2);font-variation-settings:"wght" 640;
+}
+.statusnow ul{list-style:none;margin:0;padding:0}
+.statusnow li{
+  display:flex;gap:10px;align-items:baseline;
+  padding:9px 0;border-top:1px solid var(--rule);font-size:15px;line-height:1.45;
+}
+.statusnow li:first-child{border-top:0}
+.statusnow .mk{flex:0 0 auto;width:7px;height:7px;border-radius:50%;align-self:flex-start;margin-top:7px}
+.statusnow .now .mk{background:var(--hold)}
+.statusnow .nxt .mk{background:var(--route)}
+.statusnow .when{
+  margin-left:auto;flex:0 0 auto;font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:12px;color:var(--ink2);white-space:nowrap;padding-left:14px;
+}
+.statusnow .none{color:var(--ink2);font-style:italic;font-size:14px;padding:9px 0}
+@media (max-width:720px){ .statusnow .cols{grid-template-columns:1fr;gap:20px} }
 </style>
 </head>
 <body>
@@ -205,7 +229,7 @@ h1{
 <header class="mast">
   <div class="mastrow">
     <p class="owner"><a href="https://kody.com" target="_blank" rel="noopener noreferrer">kody.com</a> — <b>Chloe Li</b>, Design</p>
-    <p class="updated">Last updated <b>21 Sep 2026</b></p>
+    <p class="updated">Last updated <!-- TRACKER:UPDATED BEGIN --><b>25 Sep 2026</b><!-- TRACKER:UPDATED END --></p>
   </div>
   <h1>Kody site structure</h1>
   <p class="sub">Every page kody.com has today, plus what the benchmarks say we&rsquo;re missing. Open any row to see why it&rsquo;s proposed and what the equivalent page looks like on Stripe, Adyen or Shopify.</p>
@@ -222,6 +246,15 @@ h1{
 </header>
 </div></div>
 
+<!-- TRACKER:STATUS BEGIN -->
+<div class="statusband"><div class="wrap statusnow">
+  <div class="cols">
+    <div><h2>In progress</h2><p class="none">Nothing recorded.</p></div>
+    <div><h2>Next up</h2><ul class="nxt"><li><span class="mk"></span><span>Flowing line animation on the landing page (desktop view)</span></li><li><span class="mk"></span><span>&quot;Payment orchestration&quot; animation in the diagram (re Stripe&#x27;s payment orchestration animation)</span></li></ul></div>
+  </div>
+</div></div>
+<!-- TRACKER:STATUS END -->
+
 <div class="wrap board">
 <main id="board"></main>
 
@@ -236,7 +269,7 @@ const DATA = [
   {id:"home", path:"/", name:"Homepage", kind:"live", when:"Live",
    note:"The redesign we're building. Right now it's also the entire website \u2014 there's no nav, so a visitor who doesn't book a demo has nowhere to go. In progress: Higher profit margin's static image is being rebuilt as live Framer frames, and the one-platform infrastructure diagram is getting a readability and visual-language pass to unify it with the rest of the page.",
    ev:"18 sections, all live",
-   subs:[{n:"Nav — SmartNav auto-hide",st:"Live",d:"4 Sep"},{n:"Hero",st:"Live",d:"4 Sep"},{n:"Client logo wall",st:"Live",d:"4 Sep"},{n:"Infrastructure diagram — one platform",st:"Live",d:"4 Sep"},{n:"CTA — Book a demo",st:"Live",d:"4 Sep"},{n:"Footer",st:"Live",d:"4 Sep"},{n:"Product pillar 1 — Higher profit margin",st:"Live",d:"11 Sep"},{n:"Product pillar 2 — Operational efficiency",st:"Live",d:"11 Sep"},{n:"Product pillar 3 — Capital",st:"Live",d:"11 Sep"},{n:"Case study — Langham",st:"Live",d:"11 Sep"},{n:"Credibility stats",st:"Live",d:"14 Sep"},{n:"Product image section",st:"Live",d:"15 Sep"},{n:"Online payment card iteration",st:"Live",d:"16 Sep"},{n:"Press section, 2 cards",st:"Live",d:"16 Sep"},{n:"Series A announcement — /press-series-a",st:"Live",d:"16 Sep"},{n:"Pre-Series A announcement — /press-pre-series-a",st:"Live",d:"16 Sep"},{n:"Case study 2 — Rosewood & MINISO",st:"Live",d:"17 Sep"},{n:"Case study — LVMH Le Café",st:"Live",d:"21 Sep"}]},
+   subs:[{n:"Nav — SmartNav auto-hide",st:"Live",d:"4 Sep"},{n:"Hero",st:"Live",d:"4 Sep"},{n:"Client logo wall",st:"Live",d:"4 Sep"},{n:"Infrastructure diagram — one platform",st:"Live",d:"4 Sep"},{n:"CTA — Book a demo",st:"Live",d:"4 Sep"},{n:"Footer",st:"Live",d:"4 Sep"},{n:"Product pillar 1 — Higher profit margin",st:"Live",d:"11 Sep"},{n:"Product pillar 2 — Operational efficiency",st:"Live",d:"11 Sep"},{n:"Product pillar 3 — Capital",st:"Live",d:"11 Sep"},{n:"Case study — Langham",st:"Live",d:"11 Sep"},{n:"Credibility stats",st:"Live",d:"14 Sep"},{n:"Product image section",st:"Live",d:"15 Sep"},{n:"Online payment card iteration",st:"Live",d:"16 Sep"},{n:"Press section, 2 cards",st:"Live",d:"16 Sep"},{n:"Series A announcement — /press-series-a",st:"Live",d:"16 Sep"},{n:"Pre-Series A announcement — /press-pre-series-a",st:"Live",d:"16 Sep"},{n:"Case study 2 — Rosewood & MINISO",st:"Live",d:"17 Sep"},{n:"Case study — LVMH Le Café",st:"Live",d:"21 Sep"},{n:"Increase operational efficiency (Redesigned, added animation)",st:"Live",d:"25 Sep"}]},
   {id:"demo", path:"/book-a-demo", name:"Book a demo", kind:"live", when:"Live",
    note:"Our only conversion path.", ev:"",
    subs:[{n:"Form — Country/Job role/Consent",st:"Live",d:"4 Sep"},{n:"Success state — handshake illustration",st:"Live",d:"4 Sep"}]},
@@ -344,7 +377,7 @@ DATA.forEach((sec, si) => {
     const div = document.createElement('div');
     div.className = 'qdivider';
     const label = document.createElement('span');
-    label.textContent = 'Planned pages for Q4';
+    label.textContent = 'Proposed pages for Q4 (not confirmed)';
     div.appendChild(label);
     board.appendChild(div);
   }
