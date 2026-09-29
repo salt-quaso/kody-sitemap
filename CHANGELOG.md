@@ -31,6 +31,15 @@ Tracks changes to `index.html`, the Kody site-structure board.
   getting a readability and visual-language pass to unify it with the
   rest of the page.
 
+## 2026-09-29
+
+- Refreshed the status strip. **In progress:** product imagery visual
+  language, homepage visual consistency (by 30 Sep), homepage motion
+  (flow-line done 29 Sep), and case study copy. **Next up:** first
+  dedicated product page.
+- Removed the two earlier "Next up" animation items, now covered by
+  the homepage motion line.
+
 ---
 
-**Last updated:** 2026-09-21
+**Last updated:** 2026-09-29
