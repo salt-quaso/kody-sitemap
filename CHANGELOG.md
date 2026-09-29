@@ -39,6 +39,16 @@ Tracks changes to `index.html`, the Kody site-structure board.
   dedicated product page.
 - Removed the two earlier "Next up" animation items, now covered by
   the homepage motion line.
+- Added **Langham case study — next iteration** to Next up.
+- Status strip now has a week stamp (**Week of 28 Sep**) and a
+  **Done** column alongside In progress and Next up.
+- Done column (right-hand side) lists the week's shipped work: 3 case
+  study cards iteration, product imagery visual refresh, hero wave
+  lines kept clear of the client logos, landing flow-line animation
+  (29 Sep), headline entrance animation and infrastructure diagram
+  payment animation (28 Sep).
+- In progress trimmed to homepage visual consistency (by 30 Sep) and
+  extending the motion language to other sections.
 
 ---
 
